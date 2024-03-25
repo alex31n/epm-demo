@@ -1,0 +1,42 @@
+/*
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #F8F9FA;
+}
+#login .login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}*/
+
+:root{
+  --brand-color:#e91e63;
+}
+
+.main-bg {
+  background: var(--brand-color) !important;
+}
+
+input:focus, button:focus {
+  border: 1px solid var(--brand-color) !important;
+  box-shadow: none !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--brand-color) !important;
+  border-color: var(--brand-color) !important;
+}
+
+.card, .btn, input{
+  border-radius:0 !important;
+}
