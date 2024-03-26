@@ -18,8 +18,9 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/dashboard")
-    public String dashboard(Model model){
-        return "home";
-    }
+    /*@RequestMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }*/
+
 }

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.Arrays;
 
@@ -28,23 +29,12 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
 
         );
-/*
-        http.formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/perform_login")
-                        .permitAll()
-                        .successForwardUrl("/dashboard")
-//                        .failureUrl("/login?error=true")
-//                        .failureHandler(authenticationFailureHandler())
-
-        );*/
 
         http
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/dashboard", true)
-//                        .successForwardUrl("/dashboard")
                 );
 
         /*http.formLogin(Customizer.withDefaults());*/
@@ -52,8 +42,9 @@ public class WebSecurityConfig {
         http.logout(logout ->
                 logout.invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
+//                        .logoutUrl("/logout")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login?logout")
                         .permitAll()
         );
 
