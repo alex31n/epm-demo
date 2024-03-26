@@ -30,15 +30,21 @@
                         <div class="card-title text-center border-bottom">
                             <h2 class="p-3">Login</h2>
                         </div>
+
+                        <div th:if="${param.error}">
+                            Invalid username and password.</div>
+                        <div th:if="${param.logout}">
+                            You have been logged out.</div>
+
                         <div class="card-body p-3">
-                            <form class="row g-3">
+                            <form class="row g-3" th:action="@{/login}" method="post">
                                 <div>
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username"/>
+                                    <input type="text" class="form-control" id="username" name="username" value="admin"/>
                                 </div>
                                 <div>
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password"/>
+                                    <input type="password" class="form-control" id="password" name="password" value="admin"/>
                                 </div>
                                 <div>
                                     <input type="checkbox" class="form-check-input" id="remember"/>

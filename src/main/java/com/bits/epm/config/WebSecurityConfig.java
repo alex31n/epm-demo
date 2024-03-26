@@ -2,6 +2,7 @@ package com.bits.epm.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -20,40 +21,61 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authz -> authz
-                .requestMatchers("/auth/**", "/js/**", "/css/**","/img/**").permitAll()
-//                .requestMatchers("/h2/**").permitAll()
-                .requestMatchers("/").permitAll()
+                        .requestMatchers("/js/**", "/css/**", "/img/**").permitAll()
+                        .requestMatchers("/").permitAll()
 //                .requestMatchers("/logout").permitAll()
-                .anyRequest().authenticated()
-        );
+//                        .requestMatchers("/login*").permitAll()
+                        .anyRequest().authenticated()
 
-        http.logout(logout->
+        );
+/*
+        http.formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
+                        .permitAll()
+                        .successForwardUrl("/dashboard")
+//                        .failureUrl("/login?error=true")
+//                        .failureHandler(authenticationFailureHandler())
+
+        );*/
+
+        http
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/dashboard", true)
+//                        .successForwardUrl("/dashboard")
+                );
+
+        /*http.formLogin(Customizer.withDefaults());*/
+
+        http.logout(logout ->
                 logout.invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/login")
                         .permitAll()
-                );
+        );
+
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder encoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User
-                .withUsername("user")
-                .password(passwordEncoder.encode("123456"))
+    public InMemoryUserDetailsManager userDetailsService() {
+
+        UserDetails user = User.withUsername("user")
+                .password(passwordEncoder().encode("user"))
                 .roles("USER")
                 .build();
-        UserDetails admin = User
-                .withUsername("admin")
-                .password(passwordEncoder.encode("admin"))
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(Arrays.asList(user,admin));
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
