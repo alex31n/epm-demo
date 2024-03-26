@@ -35,12 +35,6 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "phone", nullable = false, unique = true, length = 11)
-    private String phone;
-
-    @Column(name = "email", unique = true, length = 55)
-    private String email;
-
     @Column(name = "image")
     private String image;
 
