@@ -19,7 +19,7 @@ import java.util.Date;
 @Table(name = "employee")
 public class Employee {
 
-    public enum Gender{MALE, FEMALE}
+    public enum Gender{MALE, FEMALE, OTHER}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

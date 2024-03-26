@@ -1,6 +1,7 @@
 package com.bits.epm.data.dto;
 
 
+import com.bits.epm.data.entity.Employee;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,6 @@ import java.time.LocalDateTime;
 @Builder
 public class EmployeeDTO {
 
-    public enum Gender{MALE, FEMALE}
-
     @NotBlank
     private Long id;
 
@@ -30,7 +29,7 @@ public class EmployeeDTO {
     private LocalDate dateOfBirth;
 
     @NotBlank
-    private Gender gender;
+    private Employee.Gender gender;
 
     @NotBlank
     @Size(max = 11)
