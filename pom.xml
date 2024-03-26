@@ -78,6 +78,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!--jQuery datatable-->
+		<dependency>
+			<groupId>com.github.darrachequesne</groupId>
+			<artifactId>spring-data-jpa-datatables</artifactId>
+			<version>6.0.3</version>
+		</dependency>
+
 		<!-- dav utils-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

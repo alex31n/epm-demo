@@ -13,20 +13,20 @@
             </div>
         </div>
         <div class="row">
-            <table class="table table-bordered table-striped ">
+            <table id="employee-data" class="table table-bordered table-striped ">
                 <thead>
                 <tr>
-                    <th class="text-center">id</th>
+                    <th>id</th>
                     <th>Name</th>
                     <th>Age</th>
-                    <th class="text-center">Actions</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <!--<tbody>
                 <tr th:each="emp : ${employees}">
                     <td class="text-center" th:text="${emp.id}"></td>
                     <td th:text="${emp.name}"></td>
-<!--                    <td th:text="${emp.dateOfBirth}"></td>-->
+                    &lt;!&ndash;                    <td th:text="${emp.dateOfBirth}"></td>&ndash;&gt;
                     <td th:text="${@dateUtils.ageFromDate(emp.dateOfBirth)}"></td>
                     <td class="text-center">
                         <a href="#" class="btn btn-sm">
@@ -37,11 +37,68 @@
                         </a>
                     </td>
                 </tr>
-                </tbody>
+                </tbody>-->
             </table>
         </div>
     </div>
 </section>
+
+<th:block layout:fragment="js_assets">
+    <script th:inline="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            $("#employee-data").DataTable({
+                serverSide: true,
+                processing: true,
+                info: false,
+                // ordering: false,
+                // paging: false
+                lengthMenu: [
+                    [2, 10, 25, 50, -1],
+                    [2, 10, 25, 50, 'All']
+                ],
+                iDisplayLength: 2,
+                columnDefs: [
+                    {orderable: false, targets: [-1]}
+                ],
+                ajax: {
+                    contentType: 'application/json',
+                    url: 'api/employee/data',
+                    type: 'POST',
+                    data: function (d) {
+                        return JSON.stringify(d);
+                    }
+                },
+                columns: [
+                    {
+                        data: 'id',
+                    },
+                    {
+                        data: 'name',
+                    },
+                    {
+                        data: 'dateOfBirth',
+                        render: (data) => calculateAge(data)
+                        // "@{'deletetag(' + ${tag.id} + ');'}"
+                    },
+                    {
+                        data: 'id',
+                        render: (data) => `
+                        <a href="#" class="btn btn-sm">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                        `
+                    },
+                ]
+            });
+
+        });
+
+    </script>
+</th:block>
 
 </body>
 </html>

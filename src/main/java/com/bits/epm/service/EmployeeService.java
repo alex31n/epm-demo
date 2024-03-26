@@ -6,9 +6,8 @@ import com.bits.epm.repository.EmployeeRepository;
 import com.bits.epm.utils.ExceptionUtils;
 import com.bits.epm.utils.mapper.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +21,15 @@ public class EmployeeService{
 
     private final EmployeeMapper employeeMapper = EmployeeMapper.INSTANCE;
 
+
+    public DataTablesOutput<Employee> findAllDatatable(DataTablesInput input) {
+//        log.debug("Request to get all Users");
+        return repository.findAll(input);
+    }
+
     public List<Employee> findAll() {
         return repository.findAll();
     }
-
-    /*public Page<EmployeeDTO> findAll(Specification<Employee> spec, Pageable pageable) {
-        return null;
-    }*/
 
 
     public EmployeeDTO findById(long id) {

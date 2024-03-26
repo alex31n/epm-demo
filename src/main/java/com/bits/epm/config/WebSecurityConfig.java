@@ -1,9 +1,7 @@
 package com.bits.epm.config;
 
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -14,9 +12,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
-import java.util.Arrays;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -24,16 +19,16 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.securityMatcher(PathRequest.toH2Console());
-//        http.csrf((csrf) -> csrf.disable());
+        http.csrf((csrf) -> csrf.disable());
 //        http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
 
         http.authorizeHttpRequests(authz -> authz
                         .requestMatchers("/js/**", "/css/**", "/img/**").permitAll()
                         .requestMatchers("/").permitAll()
-//                .requestMatchers("/logout").permitAll()
-                        .requestMatchers("/login*").permitAll()
-//                        .anyRequest().authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/login").permitAll()
+//                        .requestMatchers("/api/employee/data/").permitAll()
+                        .anyRequest().authenticated()
+//                        .anyRequest().permitAll()
         );
 
         http
