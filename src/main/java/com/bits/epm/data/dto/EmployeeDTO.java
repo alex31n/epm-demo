@@ -34,7 +34,7 @@ public class EmployeeDTO implements Serializable {
     @NotNull(message = "Gender cannot be empty.")
     private Employee.Gender gender;
 
-    @Size(max = 255)
+//    @Size(max = 255)
     private String image;
 
     @Size(max = 255)

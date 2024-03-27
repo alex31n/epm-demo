@@ -39,7 +39,7 @@ public class EmployeeService{
     }
 
 
-    public EmployeeDTO create(EmployeeDTO obj) {
+    public EmployeeDTO save(EmployeeDTO obj) {
         return Stream.of(obj)
                 .map(employeeMapper::mapToEntity)
                 .map(repository::save)

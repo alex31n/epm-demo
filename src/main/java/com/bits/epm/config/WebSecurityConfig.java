@@ -25,7 +25,7 @@ public class WebSecurityConfig {
 //        http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
 
         http.authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/js/**", "/css/**", "/img/**").permitAll()
+                        .requestMatchers("/js/**", "/css/**", "/img/**","/files/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login").permitAll()
 //                        .requestMatchers("/api/employee/data/").permitAll()

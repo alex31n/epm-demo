@@ -8,11 +8,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Rollback(value = false)
 public class EmployeeDataTest {
 
     @Autowired
@@ -20,7 +24,7 @@ public class EmployeeDataTest {
 
     private Employee employee1, employee2;
 
-    @BeforeEach
+    /*@BeforeEach
     public void setupTestData(){
         // Given : Setup object or precondition
         employee1 =  Employee.builder()
@@ -34,11 +38,24 @@ public class EmployeeDataTest {
                 .dateOfBirth(new Date())
                 .gender(Employee.Gender.FEMALE)
                 .build();
-    }
+    }*/
 
     @Test
     @DisplayName("test for save employees")
     public void addEmployeeTest() {
+
+        // Given : Setup object or precondition
+        employee1 =  Employee.builder()
+                .name("User 1")
+                .dateOfBirth(new Date())
+                .gender(Employee.Gender.MALE)
+                .build();
+
+        employee2 = Employee.builder()
+                .name("User 2")
+                .dateOfBirth(new Date())
+                .gender(Employee.Gender.FEMALE)
+                .build();
 
         Employee saveEmployee1 = employeeRepository.save(employee1);
         Employee saveEmployee2 = employeeRepository.save(employee2);

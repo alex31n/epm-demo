@@ -11,7 +11,7 @@
             <div class="col-4">
                 <form id="add-employee" class="g-3 needs-validation" th:action="@{${actionUrl}}"
                       th:object="${employee}" th:with="actionUrl=(*{id}? '/employee/'+ ${id} +'/edit' : '/employee/add')"
-                      method="post" novalidate>
+                      method="post" enctype="multipart/form-data" novalidate>
 
                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors()}">
                         <h4>Errors:</h4>
@@ -52,8 +52,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Image</label>
-                        <input class="form-control" type="file" id="formFile" accept="image/*">
+                        <label for="fileImage" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="fileImage" accept="image/*" name="imageFile">
+                        <input class="form-control" type="hidden" th:field="*{image}">
                     </div>
 
                     <div class="mb-3">

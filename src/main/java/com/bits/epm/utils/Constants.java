@@ -16,4 +16,8 @@ public interface Constants {
 
     }
 
+    interface File{
+        String UPLOAD_DIR = "upload/";
+    }
+
 }
