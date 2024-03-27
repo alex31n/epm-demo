@@ -42,7 +42,28 @@
             </table>
         </div>
     </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="btnDelete" type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
+
 
 <th:block layout:fragment="js_assets">
     <script th:inline="javascript" type="text/javascript">
@@ -88,7 +109,10 @@
                         <a href="/employee/${data}/edit" class="btn btn-sm">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="btn btn-sm">
+                        <!--<a href="onDelete()" class="btn btn-sm" id="delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>-->
+                        <a onclick="onDelete(${data})" href="#" class="btn btn-sm" id="delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                         `
@@ -97,6 +121,23 @@
             });
 
         });
+
+        /*$("#delete").click(function () {
+            val name =
+            $("#modal_body").html(str);
+        });
+
+*/
+
+        function onDelete(id) {
+            $("#btnDelete").attr('data-id', id);
+        }
+
+        $("#btnDelete").click(function () {
+            const id = $(this).attr('data-id')
+            $("#deleteModal").modal('hide');
+            window.location.replace("/employee/"+id+"/delete");
+        })
 
     </script>
 </th:block>

@@ -48,13 +48,7 @@ public class EmployeeService{
                 .orElseThrow(ExceptionUtils::badRequestException);
     }
 
-
-    public EmployeeDTO update(long id, EmployeeDTO obj) {
-        return null;
-    }
-
-
-    public void deleteById(long id) {
-
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }

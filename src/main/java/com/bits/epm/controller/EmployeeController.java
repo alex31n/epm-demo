@@ -33,7 +33,6 @@ public class EmployeeController {
     }
 
 
-
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public String addEmployee(@Valid @ModelAttribute(value="employee") EmployeeDTO request, Errors errors, RedirectAttributes redirectAttributes) {
@@ -51,6 +50,7 @@ public class EmployeeController {
         return "redirect:/dashboard";
     }
 
+
     @GetMapping("/{id}/edit")
     @PreAuthorize("hasRole('ADMIN')")
     public String editEmployee(@PathVariable Long id,  Model model) {
@@ -63,6 +63,7 @@ public class EmployeeController {
         return "addEmployee";
     }
 
+
     @PostMapping("/{id}/edit")
     @PreAuthorize("hasRole('ADMIN')")
     public String editEmployee(@PathVariable Long id, @Valid @ModelAttribute(value="employee") EmployeeDTO request, Errors errors, RedirectAttributes redirectAttributes, Model model) {
@@ -72,7 +73,6 @@ public class EmployeeController {
             return "addEmployee";
         }
 
-
         try {
             request.setId(id);
             service.create(request);
@@ -81,9 +81,21 @@ public class EmployeeController {
             redirectAttributes.addFlashAttribute(Constants.Message.ERROR,"Employee updated failed: "+e.getLocalizedMessage());
         }
 
-
         return "redirect:/dashboard";
     }
 
+    @GetMapping("/{id}/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteEmployee(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+
+        try {
+            service.deleteById(id);
+            redirectAttributes.addFlashAttribute(Constants.Message.SUCCESS,"Employee deleted successfully!");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute(Constants.Message.ERROR,"Employee deleted failed: "+e.getLocalizedMessage());
+        }
+
+        return "redirect:/dashboard";
+    }
 
 }
