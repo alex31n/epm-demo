@@ -24,7 +24,7 @@
                         <label for="name" class="form-label">Name <i class="fa-solid fa-asterisk fa-2xs"
                                                                      style="color: #ff0000;"></i>
                         </label>
-                        <input type="text" class="form-control" id="name" name="name" value="" required/>
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required/>
                         <div class="invalid-feedback">
                             Please provide a name.
                         </div>
@@ -33,7 +33,7 @@
                         <label for="dob" class="form-label">Date of Birth <i class="fa-solid fa-asterisk fa-2xs"
                                                                              style="color: #ff0000;"></i>
                         </label>
-                        <input type="date" class="form-control" id="dob" name="dateOfBirth" value="" required/>
+                        <input type="date" class="form-control" id="dob" name="dateOfBirth" th:field="*{dateOfBirth}" required/>
                         <div class="invalid-feedback">
                             Please provide a date.
                         </div>
@@ -42,10 +42,14 @@
                         <label for="gender" class="form-label">Gender <i class="fa-solid fa-asterisk fa-2xs"
                                                                          style="color: #ff0000;"></i>
                         </label>
-                        <select class="form-select" id="gender" name="gender" required>
-                            <option selected disabled value="">Select a Option</option>
+                        <!--<select class="form-select" id="gender" name="gender" th:field="*{gender}"  required>
+                            <option selected value="">Select a Option</option>
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
+                        </select>-->
+                        <select class="form-select" id="gender" th:field="*{gender}"  required>
+                            <option selected value="">Select a Option</option>
+                            <option th:each="g : ${genders}" th:value="${g}" th:text="${#strings.capitalizeWords(g.name().toLowerCase())}" th:selected="${g == employee.gender}"></option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a Gender.
@@ -62,6 +66,9 @@
                         <textarea class="form-control" id="note" name="note" rows="3">
                         </textarea>
                     </div>
+
+                    <input type="hidden" th:field="*{id}"/>
+
                     <div>
                         <button type="submit" class="btn btn-primary px-5">Save</button>
                     </div>

@@ -1,6 +1,7 @@
 package com.bits.epm.controller;
 
 import com.bits.epm.data.dto.EmployeeDTO;
+import com.bits.epm.data.entity.Employee;
 import com.bits.epm.service.EmployeeService;
 import com.bits.epm.utils.Constants;
 import jakarta.validation.Valid;
@@ -10,10 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -29,8 +27,8 @@ public class EmployeeController {
     @PreAuthorize("hasRole('ADMIN')")
     public String addEmployee(Model model) {
 
+        model.addAttribute("genders", Employee.Gender.values());
         model.addAttribute("employee", new EmployeeDTO());
-
         return "addEmployee";
     }
 
@@ -38,7 +36,7 @@ public class EmployeeController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public String SaveEmployee(@Valid @ModelAttribute(value="employee") EmployeeDTO request, Errors errors, RedirectAttributes redirectAttributes) {
+    public String addEmployee(@Valid @ModelAttribute(value="employee") EmployeeDTO request, Errors errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             return "addEmployee";
         }
@@ -51,6 +49,17 @@ public class EmployeeController {
         }
 
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/{id}/edit")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String editEmployee(@PathVariable Long id,  Model model) {
+
+        var employee = service.findById(id);
+
+        model.addAttribute("employee", employee);
+
+        return "addEmployee";
     }
 
 
