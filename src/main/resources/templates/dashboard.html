@@ -109,9 +109,6 @@
                         <a href="/employee/${data}/edit" class="btn btn-sm">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        <!--<a href="onDelete()" class="btn btn-sm" id="delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>-->
                         <a onclick="onDelete(${data})" href="#" class="btn btn-sm" id="delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
@@ -121,13 +118,6 @@
             });
 
         });
-
-        /*$("#delete").click(function () {
-            val name =
-            $("#modal_body").html(str);
-        });
-
-*/
 
         function onDelete(id) {
             $("#btnDelete").attr('data-id', id);
