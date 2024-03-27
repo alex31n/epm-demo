@@ -3,14 +3,15 @@ package com.bits.epm.data.dto;
 
 import com.bits.epm.data.entity.Employee;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class EmployeeDTO {
+public class EmployeeDTO implements Serializable {
 
     private Long id;
 
@@ -27,6 +28,7 @@ public class EmployeeDTO {
     private String name;
 
     @NotNull(message = "Date of Birth cannot be empty.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotNull(message = "Gender cannot be empty.")

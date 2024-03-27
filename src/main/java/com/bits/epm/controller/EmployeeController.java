@@ -56,8 +56,9 @@ public class EmployeeController {
     public String editEmployee(@PathVariable Long id,  Model model) {
 
         var employee = service.findById(id);
-
+        log.error("employee "+employee);
         model.addAttribute("employee", employee);
+        model.addAttribute("genders", Employee.Gender.values());
 
         return "addEmployee";
     }
