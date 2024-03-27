@@ -9,9 +9,17 @@
         <div class="row mt-5 mb-2"><h1>Add Employee</h1></div>
         <div class="row">
             <div class="col-4">
-                <form id="add-employee" class="g-3 needs-validation " th:action="@{/save-employee}"
+                <form id="add-employee" class="g-3 needs-validation" th:action="@{/employee/add}"
                       th:object="${employee}"
                       method="post" novalidate>
+
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors()}">
+                        <h4>Errors:</h4>
+                        <ul>
+                            <li th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+                        </ul>
+                    </div>
+
                     <div class="form-group required mb-3">
                         <label for="name" class="form-label">Name <i class="fa-solid fa-asterisk fa-2xs"
                                                                      style="color: #ff0000;"></i>
@@ -34,7 +42,7 @@
                         <label for="gender" class="form-label">Gender <i class="fa-solid fa-asterisk fa-2xs"
                                                                          style="color: #ff0000;"></i>
                         </label>
-                        <select class="form-select" id="gender" required>
+                        <select class="form-select" id="gender" name="gender" required>
                             <option selected disabled value="">Select a Option</option>
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
@@ -55,7 +63,7 @@
                         </textarea>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary px-5">Add</button>
+                        <button type="submit" class="btn btn-primary px-5">Save</button>
                     </div>
 
                 </form>
@@ -74,9 +82,12 @@
                 if (!this.checkValidity()) {
                     e.preventDefault();
                     e.stopPropagation();
+                    $(this).addClass('was-validated');
+                }else {
+                    $(this).removeClass('was-validated');
                 }
 
-                $(this).addClass('was-validated');
+
             });
 
         });

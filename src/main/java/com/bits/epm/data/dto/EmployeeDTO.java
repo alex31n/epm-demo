@@ -3,6 +3,8 @@ package com.bits.epm.data.dto;
 
 import com.bits.epm.data.entity.Employee;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,25 +20,17 @@ import java.time.LocalDateTime;
 @Builder
 public class EmployeeDTO {
 
-    @NotBlank
     private Long id;
 
-    @NotBlank
     @Size(max = 55)
+    @NotBlank(message = "Name cannot be empty.")
     private String name;
 
-    @NotBlank
+    @NotNull(message = "Date of Birth cannot be empty.")
     private LocalDate dateOfBirth;
 
-    @NotBlank
+    @NotNull(message = "Gender cannot be empty.")
     private Employee.Gender gender;
-
-    @NotBlank
-    @Size(max = 11)
-    private String phone;
-
-    @Size(max = 55)
-    private String email;
 
     @Size(max = 255)
     private String image;
