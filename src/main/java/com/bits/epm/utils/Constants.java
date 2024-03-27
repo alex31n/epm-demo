@@ -10,6 +10,10 @@ public interface Constants {
         String CONFLICT = "Conflict Request";
     }
 
+    interface Message{
+        String SUCCESS = "SUCCESS";
+        String ERROR = "ERROR";
 
+    }
 
 }

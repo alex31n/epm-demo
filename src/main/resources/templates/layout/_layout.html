@@ -20,6 +20,20 @@
 </head>
 <body>
 <header th:replace="~{layout/header::navbar}"></header>
+<section layout:fragment="alert" th:if="${SUCCESS != null || ERROR != null}">
+    <div class="container mt-5">
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert" th:if="${SUCCESS}">
+            <span th:text="${SUCCESS}">A simple danger alert—check it out!</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert" th:if="${ERROR}">
+            <span th:text="${ERROR}">A simple danger alert—check it out!</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</section>
+
+
 <section layout:fragment="content">
     <p>Page content goes here</p>
 </section>
