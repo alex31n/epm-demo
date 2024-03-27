@@ -63,5 +63,27 @@ public class EmployeeController {
         return "addEmployee";
     }
 
+    @PostMapping("/{id}/edit")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String editEmployee(@PathVariable Long id, @Valid @ModelAttribute(value="employee") EmployeeDTO request, Errors errors, RedirectAttributes redirectAttributes, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("genders", Employee.Gender.values());
+            return "addEmployee";
+        }
+
+
+        try {
+            request.setId(id);
+            service.create(request);
+            redirectAttributes.addFlashAttribute(Constants.Message.SUCCESS,"Employee updated successfully!");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute(Constants.Message.ERROR,"Employee updated failed: "+e.getLocalizedMessage());
+        }
+
+
+        return "redirect:/dashboard";
+    }
+
 
 }
