@@ -2,9 +2,7 @@ package com.bits.epm;
 
 import com.bits.epm.data.entity.Employee;
 import com.bits.epm.repository.EmployeeRepository;
-import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -47,13 +45,13 @@ public class EmployeeDataTest {
         // Given : Setup object or precondition
         employee1 =  Employee.builder()
                 .name("User 1")
-                .dateOfBirth(new Date())
+                .dateOfBirth(LocalDate.now())
                 .gender(Employee.Gender.MALE)
                 .build();
 
         employee2 = Employee.builder()
                 .name("User 2")
-                .dateOfBirth(new Date())
+                .dateOfBirth(LocalDate.now())
                 .gender(Employee.Gender.FEMALE)
                 .build();
 

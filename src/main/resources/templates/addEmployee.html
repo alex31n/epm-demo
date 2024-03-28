@@ -56,12 +56,12 @@
 
                     <div class="mb-3">
                         <label for="fileImage" class="form-label">Image</label>
-                        <div class="mb-1 justify-content-start upload-image-thumbnail">
-                            <img id="selectedImage" class="img-fluid" style="background-color: #DFDFDF; cursor: pointer"
+                        <div class="mb-1 upload-image-thumbnail">
+                            <img id="selectedImage" class="img-fluid d-block" style="background-color: #DFDFDF; cursor: pointer"
                                  th:src="${imgUrl}"
                                  th:with="imgUrl=*{image} ? ('/files/' + *{image}) : '/img/img-avatar.png'"
                                  alt="Employee image" onclick="openFileDialog()"/>
-                            <button type="button" class="btn btn-light" onclick="openFileDialog()">Upload</button>
+                            <button type="button" class="btn btn-light d-block" onclick="openFileDialog()">Upload</button>
                         </div>
                         <input class="form-control d-none" type="file" id="fileImage" accept="image/*" name="imageFile"
                                onchange="displaySelectedImage()">
@@ -70,7 +70,7 @@
 
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+                        <textarea class="form-control" id="note" rows="3" th:field="*{name}"></textarea>
                     </div>
 
                     <input type="hidden" th:field="*{id}"/>

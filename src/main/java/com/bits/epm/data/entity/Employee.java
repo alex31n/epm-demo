@@ -2,15 +2,15 @@ package com.bits.epm.data.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.WithBy;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+@WithBy
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +29,7 @@ public class Employee {
     private String name;
 
     @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "gender", nullable = false, length = 55)
     @Enumerated(EnumType.STRING)
