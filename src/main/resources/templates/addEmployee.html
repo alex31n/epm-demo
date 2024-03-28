@@ -57,7 +57,7 @@
                     <div class="mb-3">
                         <label for="fileImage" class="form-label">Image</label>
                         <div class="mb-1 justify-content-start upload-image-thumbnail">
-                            <img id="selectedImage" class="img-fluid" style="background-color: #DFDFDF"
+                            <img id="selectedImage" class="img-fluid" style="background-color: #DFDFDF; cursor: pointer"
                                  th:src="${imgUrl}"
                                  th:with="imgUrl=*{image} ? ('/files/' + *{image}) : '/img/img-avatar.png'"
                                  alt="Employee image" onclick="openFileDialog()"/>
