@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/_layout}">
+      layout:decorate="~{layout/_layout}" lang="en">
 
 <body>
 
@@ -10,7 +10,8 @@
         <div class="row">
             <div class="col-4">
                 <form id="add-employee" class="g-3 needs-validation" th:action="@{${actionUrl}}"
-                      th:object="${employee}" th:with="actionUrl=(*{id}? '/employee/'+ ${id} +'/edit' : '/employee/add')"
+                      th:object="${employee}"
+                      th:with="actionUrl=(*{id}? '/employee/'+ ${id} +'/edit' : '/employee/add')"
                       method="post" enctype="multipart/form-data" novalidate>
 
                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors()}">
@@ -44,7 +45,9 @@
                         </label>
                         <select class="form-select" id="gender" th:field="*{gender}" required>
                             <option selected value="">Select a Option</option>
-                            <option th:each="g : ${genders}" th:value="${g}" th:text="${#strings.capitalizeWords(g.name().toLowerCase())}" th:selected="${g == employee.gender}"></option>
+                            <option th:each="g : ${genders}" th:value="${g}"
+                                    th:text="${#strings.capitalizeWords(g.name().toLowerCase())}"
+                                    th:selected="${g == employee.gender}"></option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a Gender.
@@ -53,7 +56,15 @@
 
                     <div class="mb-3">
                         <label for="fileImage" class="form-label">Image</label>
-                        <input class="form-control" type="file" id="fileImage" accept="image/*" name="imageFile">
+                        <div class="mb-1 justify-content-start upload-image-thumbnail">
+                            <img id="selectedImage" class="img-fluid" style="background-color: #DFDFDF"
+                                 th:src="${imgUrl}"
+                                 th:with="imgUrl=*{image} ? ('/files/' + *{image}) : '/img/img-avatar.png'"
+                                 alt="Employee image" onclick="openFileDialog()"/>
+                            <button type="button" class="btn btn-light" onclick="openFileDialog()">Upload</button>
+                        </div>
+                        <input class="form-control d-none" type="file" id="fileImage" accept="image/*" name="imageFile"
+                               onchange="displaySelectedImage()">
                         <input class="form-control" type="hidden" th:field="*{image}">
                     </div>
 
@@ -85,7 +96,7 @@
                     e.preventDefault();
                     e.stopPropagation();
                     $(this).addClass('was-validated');
-                }else {
+                } else {
                     $(this).removeClass('was-validated');
                 }
 
@@ -93,6 +104,29 @@
             });
 
         });
+
+        function openFileDialog() {
+            $("#fileImage").click()
+        }
+
+        function displaySelectedImage() {
+
+            const selectedImage = $("#selectedImage");
+            const fileInput = $("#fileImage")
+
+            if (fileInput[0].files && fileInput[0].files[0]) {
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    selectedImage.attr('src', e.target.result)
+                };
+                reader.readAsDataURL(fileInput[0].files[0]);
+
+            } else {
+                selectedImage.attr('src', '/img/img-avatar.png')
+            }
+        }
+
 
     </script>
 </th:block>

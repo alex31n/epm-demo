@@ -40,3 +40,12 @@ input:focus, button:focus {
 .card, .btn, input{
   border-radius:0 !important;
 }
+
+.upload-image-thumbnail{
+}
+
+.upload-image-thumbnail img, .upload-image-thumbnail button {
+  max-width: 100%;
+  height: auto;
+  width: 200px
+}
