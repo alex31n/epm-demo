@@ -28,6 +28,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/js/**", "/css/**", "/img/**","/files/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/report").permitAll()
 //                        .requestMatchers("/api/employee/data/").permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()

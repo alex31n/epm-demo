@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/_layout}">
+
+<body>
+
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row mt-5 mb-3"><h1>Employees Reports</h1></div>
+        <div class="row">
+            <div class="col-6">
+                <table id="reports" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 60%">Gender</th>
+                        <th style="width: 40%">Employee Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="report : ${reports}">
+                        <td th:text="${report.gender}"></td>
+                        <td th:text="${report.count}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+<th:block layout:fragment="js_assets">
+    <script th:inline="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            $("#employee-data").DataTable({
+                info: false,
+                // ordering: false,
+                // paging: false
+
+            });
+
+        });
+
+    </script>
+</th:block>
+
+</body>
+</html>
