@@ -26,6 +26,42 @@
                 </table>
             </div>
         </div>
+
+        <div class="row mt-5">
+            <h3 class="mb-3">Coindesk data</h3>
+            <p class="font-weight-bold" th:text="${coindesk.chartName}"></p>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <table id="coindesk" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 60%">Currency</th>
+                        <th style="width: 40%">Rate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:object="${coindesk.bpi.uSD}">
+                        <td th:text="*{code}"></td>
+                        <td th:text="*{rate}"></td>
+                    </tr>
+                    <tr th:object="${coindesk.bpi.gBP}">
+                        <td th:text="*{code}"></td>
+                        <td th:text="*{rate}"></td>
+                    </tr>
+                    <tr th:object="${coindesk.bpi.eUR}">
+                        <td th:text="*{code}"></td>
+                        <td th:text="*{rate}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <p th:text="${coindesk.disclaimer}"></p>
+        </div>
+
     </div>
 
 

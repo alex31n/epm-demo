@@ -17,10 +17,7 @@ public class EmployeeReportService {
 
 
     public List<IEmployeeReport> getEmployeeReport(){
-        var reports = repository.employeeReports();
-
-        reports.forEach(IEmployeeReport::print);
-        return reports;
+        return repository.employeeReports();
     }
 
 }
