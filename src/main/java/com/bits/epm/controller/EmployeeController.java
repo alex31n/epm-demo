@@ -2,7 +2,7 @@ package com.bits.epm.controller;
 
 import com.bits.epm.data.dto.EmployeeDTO;
 import com.bits.epm.data.entity.Employee;
-import com.bits.epm.service.EmployeeService;
+import com.bits.epm.service.impl.EmployeeServiceImpl;
 import com.bits.epm.utils.Constants;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class EmployeeController {
 
-    private final EmployeeService service;
+    private final EmployeeServiceImpl service;
 
 
     @GetMapping("/add")
