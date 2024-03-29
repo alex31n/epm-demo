@@ -29,6 +29,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/report").permitAll()
+                        .requestMatchers("/api/v1/employee").permitAll()
 //                        .requestMatchers("/api/employee/data/").permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()

@@ -17,9 +17,9 @@ public class DashboardController {
     @RequestMapping
     public String dashboard(Model model){
 
-        var list = employeeService.findAll();
+//        var list = employeeService.findAll();
 
-        model.addAttribute("employees", list);
+//        model.addAttribute("employees", list);
         model.addAttribute("CONTENT_TITLE", "Dashboard");
 
         return "dashboard";

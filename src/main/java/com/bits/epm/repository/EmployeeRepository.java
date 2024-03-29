@@ -5,12 +5,13 @@ import com.bits.epm.data.report.IEmployeeReport;
 import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee,Long>, DataTablesRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee,Long>, DataTablesRepository<Employee, Long>, PagingAndSortingRepository<Employee, Long> {
 
 
     @Query(value = "select gender, count (Employee.id) as count from Employee GROUP BY gender", nativeQuery = true)

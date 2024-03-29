@@ -7,6 +7,8 @@ import com.bits.epm.utils.ExceptionUtils;
 import com.bits.epm.utils.mapper.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
@@ -33,8 +35,10 @@ public class EmployeeService {
         return repository.findAll(input);
     }
 
-    public List<Employee> findAll() {
-        return repository.findAll();
+    public Page<Employee> findAll(Pageable pageable) {
+        var list =  repository.findAll(pageable);
+
+        return list;
     }
 
 
