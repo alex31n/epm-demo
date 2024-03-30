@@ -6,6 +6,7 @@ This repository contains a small but complete web application developed using th
 
 ### Basic Information
 URL: `http://localhost:8080`  
+Database: H2 (In-memory)    
 Admin: username: admin, password: 123456, role: ADMIN  
 User: username: user, password: 123456, role: USER  
 
