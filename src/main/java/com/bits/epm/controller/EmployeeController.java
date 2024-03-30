@@ -58,7 +58,7 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}/edit")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String editEmployee(@PathVariable Long id, Model model) {
 
         var employee = service.findById(id);
@@ -70,7 +70,7 @@ public class EmployeeController {
 
 
     @PostMapping("/{id}/edit")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String editEmployee(@PathVariable Long id,
                                @Valid @ModelAttribute(value = "employee") EmployeeDTO request,
                                @RequestParam("imageFile") MultipartFile imageFile,
@@ -96,7 +96,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}/delete")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String deleteEmployee(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 
         try {

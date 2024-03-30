@@ -66,11 +66,11 @@ public class WebSecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
 
         UserDetails user = User.withUsername("user")
-                .password(passwordEncoder().encode("user"))
+                .password(passwordEncoder().encode("123456"))
                 .roles("USER")
                 .build();
         UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password(passwordEncoder().encode("123456"))
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
