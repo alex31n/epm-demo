@@ -5,10 +5,15 @@ This repository contains a small but complete web application developed using th
 
 
 ### Basic Information
-URL: `http://localhost:8080.`  
+URL: `http://localhost:8080`  
 Admin: username: admin, password: 123456, role: ADMIN  
 User: username: user, password: 123456, role: USER  
 
+
+### Requirements
+To run this application locally, ensure you have the following installed:
+- Java JDK (version 17 or higher)
+- Maven
 
 ### Installation
 Clone this repository to your local machine:  
@@ -52,19 +57,19 @@ Run the application:
 
 ### Screenshots
 
-Login page
+Login page  
 ![](/assets/page_login.png "Login page")
 
-Dashboard
+Dashboard  
 ![](/assets/page_dashboard.png "Dashboard")
 
-Add Employee
+Add Employee  
 ![](/assets/page_add_employee.png "Add Employee")
 
-Delete Employee
+Delete Employee  
 ![](/assets/page_delete_employee.png "Delete Employee")
 
-Report with Third-party API consumed
+Report with Third-party API consumed  
 ![](/assets/page_report.png "Report with Third-party API consumed")
 
 
