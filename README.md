@@ -1,1 +1,3 @@
-# epm-demo
+# Demo for Employee Profile Management Web Application
+
+This repository contains a small but complete web application developed using the Java Spring Boot framework. The application allows users to manage employee profiles, including adding, editing, and deleting employee entries. Additionally, it provides a report screen to display gender-wise employee counts and consumes a third-party REST API to display cryptocurrency prices.
